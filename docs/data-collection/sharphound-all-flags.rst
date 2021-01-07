@@ -18,14 +18,15 @@ common options you'll likely use:
   Directory security group membership, domain trusts, abusable permissions on AD
   objects, OU tree structure, Group Policy links, the most relevant AD object
   properties, local groups from domain-joined Windows systems, and user sessions.
+* **All:** Performs all collection methods except for *GPOLocalGroup*.
 * **DCOnly:** Collects data ONLY from the domain controller, will not touch other
   domain-joined Windows systems. Collects AD security group memberships, domain
   trusts, abusable permissions on AD objects, OU tree structure, Group Policy
   links, the most relevant AD object properties, and will attempt to correlate
   Group Policy-enforced local groups to affected computers.
-* **ComputerOnly:** Collects user sessions and local groups from domain-joined
-  Windows systems. Will NOT collect the data collected with the DCOnly collection
-  method.
+* **ComputerOnly:** Collects user sessions (*Session*) and local groups (*LocalGroup*) 
+  from domain-joined Windows systems. Will NOT collect the data collected with the DCOnly 
+  collection method.
 * **Session:** Just does user session collection. You will likely couple this with
   the --Loop option. See SharpHound examples below for more info on that.
 * **LoggedOn:** Does session collection using the privileged collection method. Use
@@ -41,6 +42,9 @@ Here are the less common CollectionMethods and what they do:
   touch domain-joined systems, just gets info from domain controllers
 * **Trusts:** Just collect domain trusts
 * **Container:** Just collect the OU tree structure and Group Policy links
+* **LocalGroup:** Just collect the members of all interesting local groups on 
+  each domain-joined computer. Equivalent for *LocalAdmin* + *RDP* + *DCOM* + 
+  *PSRemote*
 * **LocalAdmin:** Just collect the members of the local Administrators group on
   each domain-joined computer
 * **RDP:** Just collect the members of the Remote Desktop Users group on each
@@ -49,6 +53,8 @@ Here are the less common CollectionMethods and what they do:
   domain-joined computer
 * **PSRemote:** Just collect the members of the Remote Management group on each
   domain-joined computer
+* **ObjectProps** - Performs Object Properties collection for properties 
+  such as LastLogon or PwdLastSet
 
 Domain
 ------
